@@ -30,8 +30,8 @@ OVERLAY = function()
 		}
 		return (/input|select|textarea|button|object/.test( nodeName ) ?
 				!element.disabled :
-				'a' === nodeName ? 
-					element.href || isTabIndexNotNaN : 
+				'a' === nodeName ?
+					element.href || isTabIndexNotNaN :
 					isTabIndexNotNaN
 			);
 	}
@@ -87,21 +87,21 @@ OVERLAY = function()
 					width: win.width()
 				});
 			}
-			$(window).bind('resize'+MODALSELECTOR, resize);
+			$(window).on('resize'+MODALSELECTOR, resize);
 			resize(); // Fire it initially too
 
 			// Make sure we can't focus anything outside the tooltip
-			$(document.body).bind('focusin'+MODALSELECTOR, stealFocus);
+			$(document.body).on('focusin'+MODALSELECTOR, stealFocus);
 
 			// Apply keyboard "Escape key" close handler
-			$(document).bind('keydown'+MODALSELECTOR, function(event) {
+			$(document).on('keydown'+MODALSELECTOR, function(event) {
 				if(current && current.options.show.modal.escape && event.keyCode === 27) {
 					current.hide(event);
 				}
 			});
 
 			// Apply click handler for blur option
-			elem.bind('click'+MODALSELECTOR, function(event) {
+			elem.on('click'+MODALSELECTOR, function(event) {
 				if(current && current.options.show.modal.blur) {
 					current.hide(event);
 				}
@@ -193,7 +193,7 @@ OVERLAY = function()
 
 			return self;
 		}
-	});	
+	});
 
 	self.init();
 };
@@ -218,7 +218,7 @@ $.extend(Modal.prototype, {
 
 		// Add unique attribute so we can grab modal tooltips easily via a SELECTOR, and set z-index
 		tooltip.addClass(MODALCLASS).css('z-index', PLUGINS.modal.zindex + $(MODALSELECTOR).length);
-		
+
 		// Apply our show/hide/focus modal events
 		qtip._bind(tooltip, ['tooltipshow', 'tooltiphide'], function(event, api, duration) {
 			var oEvent = event.originalEvent;
@@ -304,7 +304,7 @@ MODAL = PLUGINS.modal = function(api) {
 
 // Setup sanitiztion rules
 MODAL.sanitize = function(opts) {
-	if(opts.show) { 
+	if(opts.show) {
 		if(typeof opts.show.modal !== 'object') { opts.show.modal = { on: !!opts.show.modal }; }
 		else if(typeof opts.show.modal.on === 'undefined') { opts.show.modal.on = TRUE; }
 	}
@@ -322,7 +322,7 @@ CHECKS.modal = {
 		// Initialise
 		this.destroy();
 		this.init();
-		
+
 		// Show the modal if not visible already and tooltip is visible
 		this.qtip.elems.overlay.toggle(
 			this.qtip.tooltip[0].offsetWidth > 0

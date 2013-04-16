@@ -149,7 +149,7 @@ $.extend(Tip.prototype, {
 			prop = BORDER + camel(corner.y) + camel(corner.x) + 'Radius';
 
 		return BROWSER.ie < 9 ? 0 :
-			intCss(this._useTitle(corner) && elements.titlebar || elements.content, prop) || 
+			intCss(this._useTitle(corner) && elements.titlebar || elements.content, prop) ||
 			intCss(elements.tooltip, prop) || 0;
 	},
 
@@ -166,11 +166,11 @@ $.extend(Tip.prototype, {
 			css = this._invalidColour, color = [];
 
 		// Attempt to detect the background colour from various elements, left-to-right precedance
-		color[0] = css(tip, BG_COLOR) || css(colorElem, BG_COLOR) || css(elements.content, BG_COLOR) || 
+		color[0] = css(tip, BG_COLOR) || css(colorElem, BG_COLOR) || css(elements.content, BG_COLOR) ||
 			css(tooltip, BG_COLOR) || tip.css(BG_COLOR);
 
 		// Attempt to detect the correct border side colour from various elements, left-to-right precedance
-		color[1] = css(tip, borderSide, COLOR) || css(colorElem, borderSide, COLOR) || 
+		color[1] = css(tip, borderSide, COLOR) || css(colorElem, borderSide, COLOR) ||
 			css(elements.content, borderSide, COLOR) || css(tooltip, borderSide, COLOR) || tooltip.css(borderSide);
 
 		// Reset background and border colours
@@ -204,7 +204,7 @@ $.extend(Tip.prototype, {
 	},
 
 	// Tip coordinates calculator
-	_calculateTip: function(corner) {	
+	_calculateTip: function(corner) {
 		var width = this.size[0], height = this.size[1],
 			width2 = Math.ceil(width / 2), height2 = Math.ceil(height / 2),
 
@@ -230,7 +230,7 @@ $.extend(Tip.prototype, {
 	create: function() {
 		// Determine tip corner
 		var c = this.corner = (HASCANVAS || BROWSER.ie) && this._parseCorner(this.options.corner);
-		
+
 		// If we have a tip corner...
 		if( (this.enabled = !!this.corner && this.corner.abbrev() !== 'c') ) {
 			// Cache it
@@ -369,7 +369,7 @@ $.extend(Tip.prototype, {
 				',' + coords[3] + ' ' + coords[4] + ',' + coords[5] + ' xe';
 
 			// Setup VML-specific offset for pixel-perfection
-			translate[2] = border && /^(r|b)/i.test(corner.string()) ? 
+			translate[2] = border && /^(r|b)/i.test(corner.string()) ?
 				BROWSER.ie === 8 ? 2 : 1 : 0;
 
 			// Set initial CSS
@@ -510,7 +510,7 @@ $.extend(Tip.prototype, {
 					pos.left -= adjust.left;
 					shift.left = FALSE;
 				}
-				
+
 				css[ offset.right !== undefined ? RIGHT : LEFT ] = shift.x;
 			}
 		}
@@ -582,7 +582,7 @@ CHECKS.tip = {
 	'^position.my|style.tip.(corner|mimic|border)$': function() {
 		// Make sure a tip can be drawn
 		this.create();
-		
+
 		// Reposition the tooltip
 		this.qtip.reposition();
 	},
